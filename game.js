@@ -13,8 +13,8 @@ class Vector {
         return new Vector(this.x + vector.x, this.y + vector.y);
     }
 
-    times(int) {
-        return new Vector(int * this.x, int * this.y);
+    times(num) {
+        return new Vector(num * this.x, num * this.y);
     }
 }
 
@@ -289,3 +289,17 @@ class Player extends Actor {
     return 'player';
   }
 }
+
+const actorDict = {
+    '@': Player,
+    'v': FireRain,
+    'o': Coin,
+    '=': HorizontalFireball,
+    '|': VerticalFireball
+};
+
+const parser = new LevelParser(actorDict);
+
+loadLevels()
+    .then((schemas) => {runGame(JSON.parse(schemas), parser, DOMDisplay)
+    .then(() => alert('Вы выиграли!'))});
